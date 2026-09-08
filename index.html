@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#f8f5ee" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="icon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Draw Daily</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#home" aria-label="Draw Daily home">Draw<span>Daily</span></a>
+        <nav aria-label="Main navigation">
+          <button class="nav-link active" data-view="practice">Practice</button>
+          <button class="nav-link" data-view="gallery">Gallery <span id="gallery-count"></span></button>
+        </nav>
+      </header>
+
+      <section id="practice-view" class="view active">
+        <aside class="lesson-panel" aria-label="Exercise options">
+          <div class="eyebrow">TODAY'S DRILL</div>
+          <h1 id="exercise-title">Line confidence</h1>
+          <p id="exercise-description">Draw long, smooth strokes from one dot to the next. Commit to every mark.</p>
+          <div class="reference-card">
+            <div class="reference-label">REFERENCE</div>
+            <svg id="reference-art" viewBox="0 0 220 142" role="img" aria-label="Exercise reference"></svg>
+          </div>
+          <label class="field-label" for="exercise-select">CHANGE EXERCISE</label>
+          <select id="exercise-select">
+            <option value="lines">Line confidence</option>
+            <option value="ellipses">Ellipses</option>
+            <option value="boxes">Simple boxes</option>
+            <option value="shading">Shading</option>
+          </select>
+          <div class="tip"><strong>Tip</strong><span id="exercise-tip">Ghost the stroke a few times before the pencil touches down.</span></div>
+        </aside>
+
+        <section class="studio" aria-label="Drawing studio">
+          <div class="studio-head">
+            <div class="status"><span class="pulse"></span><span id="save-status">Ready to draw</span></div>
+            <div class="timer"><button id="timer-button" aria-label="Start timer">▶</button><span id="timer-display">00:00</span></div>
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="drawing-canvas" aria-label="Drawing canvas. Draw here using Apple Pencil or touch."></canvas>
+            <div id="canvas-hint" class="canvas-hint">Pick up your Pencil and make the first mark.</div>
+          </div>
+          <div class="toolbar" role="toolbar" aria-label="Drawing tools">
+            <div class="tool-group">
+              <button class="tool active" data-tool="pen" aria-label="Pen">✎ <span>Pen</span></button>
+              <button class="tool" data-tool="eraser" aria-label="Eraser">⌫ <span>Erase</span></button>
+            </div>
+            <div class="tool-group brush-control">
+              <label for="brush-size">Size</label>
+              <input id="brush-size" type="range" min="2" max="22" value="5" />
+              <output id="brush-output">5</output>
+            </div>
+            <div class="tool-group colors" aria-label="Color">
+              <button class="swatch active" data-color="#25231f" style="--swatch:#25231f" aria-label="Black"></button>
+              <button class="swatch" data-color="#8f4232" style="--swatch:#8f4232" aria-label="Rust"></button>
+              <button class="swatch" data-color="#315d77" style="--swatch:#315d77" aria-label="Blue"></button>
+              <button class="swatch" data-color="#52734f" style="--swatch:#52734f" aria-label="Green"></button>
+            </div>
+            <div class="tool-group history-tools">
+              <button id="undo" class="icon-tool" aria-label="Undo" disabled>↶</button>
+              <button id="redo" class="icon-tool" aria-label="Redo" disabled>↷</button>
+              <button id="clear" class="icon-tool danger" aria-label="Clear canvas">⌘</button>
+            </div>
+            <button id="save-drawing" class="save-button">Save drawing</button>
+          </div>
+        </section>
+      </section>
+
+      <section id="gallery-view" class="view gallery-view">
+        <div class="gallery-heading"><div><div class="eyebrow">YOUR PRACTICE</div><h1>Drawing gallery</h1></div><p>Small, regular sessions add up.</p></div>
+        <div id="gallery-grid" class="gallery-grid"></div>
+      </section>
+    </main>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
